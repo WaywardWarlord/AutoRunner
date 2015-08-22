@@ -3,6 +3,7 @@ import Global_vars
 from Level_mother import Level
 from Platform import Platform
 import random
+from Functions import adding
 
 class Level_01(Level):
 
@@ -14,39 +15,28 @@ class Level_01(Level):
         self.level_limit = -1000
 
         # Array with the width, height, x, and y of platform
-        #level = [[Global_vars.platform_width, Global_vars.platform_height, 300, 540],
-        #         [Global_vars.platform_width, Global_vars.platform_height, Global_vars.platform_x, Global_vars.platform_y]
-        #         ]
 
-        #platform_width = random.randrange(SCREEN_WIDTH - 200, SCREEN_WIDTH + 400)
-        #platform_height = SCREEN_HEIGHT - 200
-        #platform_x = random.randrange(platform_width + player_width, platform_width + player_jump_length)
-        #platform_y = random.randrange(platform_height, platform_height + 100)
-
-        platforms = 5
-        old_width = 0
-        platform_level = []
+        platforms = 4
+        width = []
+        width.append(random.randrange(Global_vars.SCREEN_WIDTH - 200, Global_vars.SCREEN_WIDTH + 400))
+        height = Global_vars.SCREEN_HEIGHT - 200
+        platform_level = [[width[0], height, 0, 450]]
+        i = 0
 
         while platforms > 0:
             if platforms > 0:
-                width = random.randrange(Global_vars.SCREEN_WIDTH - 200, Global_vars.SCREEN_WIDTH + 400)
-                height = Global_vars.SCREEN_HEIGHT - 200
-                if platforms == 5:
-                    x = width + random.randrange(Global_vars.player_width, Global_vars.player_jump_length)
-                    y = random.randrange(height, height + 100)
+                width.append(random.randrange(Global_vars.SCREEN_WIDTH - 200, Global_vars.SCREEN_WIDTH + 400))
+                gap = random.randrange(120, Global_vars.player_jump_length)
+                if len(width) > 2:
+                    x += width[i] + gap
                 else:
-                    x = old_width + random.randrange(Global_vars.player_width, Global_vars.player_jump_length)
-                    y = random.randrange(height, height + 100)
-                if x <= width:
+                    x = width[i] + gap
+                y = random.randrange(height, height + 50)
+                if x <= width[i]:
                     x += Global_vars.player_jump_length
-                platform_level.append([width, height, x, y])
+                platform_level.append([width[-1], height, x, y])
                 platforms -= 1
-                old_width = width
-                print (width)
-                print (height )
-                print (x)
-                print (y)
-        print (platform_level)
+                i += 1
 
         # Go through the array above and add playforms
         for platform in platform_level:
