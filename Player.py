@@ -1,6 +1,7 @@
 import pygame
 import random
 import Global_vars
+import os, sys
 
 class Player(pygame.sprite.Sprite):
 
@@ -10,10 +11,13 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
 
         # Image of Player
+        #image = pygame.image.load(Player_spritesheet.png)
+        self.image = pygame.image.load("Sprites\Player_base.png")
+        #self.image = image.convert()
         width = Global_vars.player_width
         height = Global_vars.player_height
-        self.image = pygame.Surface([width, height])
-        self.image.fill(Global_vars.RED)
+        #self.image = pygame.Surface([width, height])
+        #self.image.fill(Global_vars.RED)
 
         # Set a rectangle hitbox
         self.rect = self.image.get_rect()
@@ -91,12 +95,8 @@ class Player(pygame.sprite.Sprite):
 
         Global_vars.steps += 1
 
-
-    def go_left(self):
-        self.change_x = -8
-
     def go_right(self):
-        self.change_x = 8
+        self.change_x = Global_vars.player_speed
 
     def stop(self):
         self.change_x = 0

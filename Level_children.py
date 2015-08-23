@@ -17,6 +17,7 @@ class Level_01(Level):
         width = []
         platforms = 30
         width.append(random.randrange(Global_vars.SCREEN_WIDTH - 200, Global_vars.SCREEN_WIDTH + 400))
+        gap = random.randrange(120, Global_vars.player_jump_length + 100)
         height = Global_vars.SCREEN_HEIGHT - 200
         platform_level = [[width[0], height, 0, 450]]
         i = 0
@@ -24,7 +25,6 @@ class Level_01(Level):
         while platforms > 0:
             if platforms > 0:
                 width.append(random.randrange(Global_vars.SCREEN_WIDTH - 200, Global_vars.SCREEN_WIDTH + 400))
-                gap = random.randrange(120, Global_vars.player_jump_length)
                 if len(width) > 2:
                     x += width[i] + gap
                 else:

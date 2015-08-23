@@ -15,7 +15,7 @@ def __init__():
     global player_jump_height
     global steps
     global platforms
-    global tick 
+    global player_speed
 
 
     # Global constants
@@ -38,4 +38,4 @@ def __init__():
     player_pos = (340, SCREEN_HEIGHT)
     steps = 0
     platforms = 0
-    tick = 0
+    player_speed = 8.0

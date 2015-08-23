@@ -55,9 +55,8 @@ def main():
                     player.jump()
 
 
-        if Global_vars.steps == Global_vars.tick:
-            Global_vars.platforms += 1
-            Global_vars.tick += 1
+        if Global_vars.steps % 3 == 0:
+            Global_vars.player_speed += 0.01
 
         # Update the Player
         active_sprite_list.update()
