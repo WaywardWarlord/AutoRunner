@@ -1,5 +1,4 @@
-import random
-
+import time
 def __init__():
 
     global player_jump_height
@@ -14,6 +13,10 @@ def __init__():
     global player_height
     global player_jump_length
     global player_jump_height
+    global steps
+    global platforms
+    global tick 
+
 
     # Global constants
     BLACK = (0,0,0)
@@ -33,3 +36,6 @@ def __init__():
     player_jump_height = -10
     player_jump_length = 170
     player_pos = (340, SCREEN_HEIGHT)
+    steps = 0
+    platforms = 0
+    tick = 0

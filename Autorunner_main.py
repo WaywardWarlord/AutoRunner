@@ -5,7 +5,7 @@ from Player import Player
 import Global_vars
 from Platform import Platform
 from Level_mother import Level
-from Level_children import Level_01
+from Level_children import Level_01, Level_02
 
 Global_vars.__init__()
 
@@ -25,6 +25,7 @@ def main():
     # Create all the levels
     level_list = []
     level_list.append(Level_01(player))
+    level_list.append(Level_02(player))
 
     # Set current level
     current_level_no = 0
@@ -33,7 +34,7 @@ def main():
     active_sprite_list = pygame.sprite.Group()
     player.level = current_level
 
-    player.rect.x = 340
+    player.rect.x = 140
     player.rect.y = player.starting_position
     active_sprite_list.add(player)
 
@@ -50,21 +51,14 @@ def main():
                 done = True
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    player.go_left()
-                if event.key == pygame.K_RIGHT:
-                    player.go_right()
                 if event.key == pygame.K_UP:
                     player.jump()
 
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT and player.change_x < 0:
-                    player.stop()
-                if event.key == pygame.K_RIGHT and player.change_x > 0:
-                    player.stop()
 
-        # Makes the player Autorun
-        # player.go_right()
+        if Global_vars.steps == Global_vars.tick:
+            Global_vars.platforms += 1
+            Global_vars.tick += 1
+
         # Update the Player
         active_sprite_list.update()
 
@@ -76,6 +70,18 @@ def main():
             diff = player.rect.right - 500
             player.rect.right = 500
             current_level.shift_world(-diff)
+
+        current_position = player.rect.x + current_level.world_shift
+        if current_position < current_level.level_limit:
+            player.rect.x = 140
+            player.rect.y = Global_vars.SCREEN_HEIGHT / 2
+            if current_level_no < len(level_list) -1:
+                current_level_no += 1
+                current_level = level_list[current_level_no]
+                player.level = current_level
+
+        # Makes the player Autorun
+        player.go_right()
 
         # All code to draw is below this comment!!!
         current_level.draw(screen)

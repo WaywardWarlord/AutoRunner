@@ -89,12 +89,14 @@ class Player(pygame.sprite.Sprite):
         if len(platform_hit_list) > 0 or self.rect.bottom >= Global_vars.SCREEN_HEIGHT:
             self.change_y = Global_vars.player_jump_height
 
+        Global_vars.steps += 1
+
 
     def go_left(self):
-        self.change_x = -6
+        self.change_x = -8
 
     def go_right(self):
-        self.change_x = 6
+        self.change_x = 8
 
     def stop(self):
         self.change_x = 0
